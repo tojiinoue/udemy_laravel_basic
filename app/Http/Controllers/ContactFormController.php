@@ -16,20 +16,50 @@ class ContactFormController extends Controller
      */
     public function index(Request $request)
     {
-        // $contacts = ContactForm::select('id', 'name', 'title', 'created_at')
-        // ->get();
-
         $search = $request->search;
+        $sort = $request->input('sort', 'id'); // デフォルトはid
+        $direction = $request->input('direction', 'asc'); // デフォルトは昇順
+
+        // 並べ替え可能なカラムのみ許可
+        $allowedSorts = ['id', 'name', 'title', 'created_at', 'email'];
+        if (!in_array($sort, $allowedSorts)) {
+            $sort = 'id';
+        }
+        $allowedDirections = ['asc', 'desc'];
+        if (!in_array($direction, $allowedDirections)) {
+            $direction = 'asc';
+        }
+
         $query = ContactForm::search($search);
-        $contacts = $query->select('id', 'name', 'title', 'created_at')
-        ->paginate(20);
+        $perPage = 20;
 
+        if ($sort === 'name') {
+            // DBから全件取得し、コレクションで五十音順ソート
+            $all = $query->select('id', 'name', 'title', 'created_at')->get();
+            $sorted = $all->sortBy(function($item) {
+                // mb_convert_kanaでカタカナ変換し、五十音順で比較
+                return mb_convert_kana($item->name, 'C');
+            }, SORT_REGULAR, $direction === 'desc');
+            // ページネーション手動
+            $page = $request->input('page', 1);
+            $contacts = new \Illuminate\Pagination\LengthAwarePaginator(
+                $sorted->slice(($page - 1) * $perPage, $perPage)->values(),
+                $sorted->count(),
+                $perPage,
+                $page,
+                [
+                    'path' => $request->url(),
+                    'query' => $request->query(),
+                ]
+            );
+        } else {
+            $contacts = $query->select('id', 'name', 'title', 'created_at', 'email')
+                ->orderBy($sort, $direction)
+                ->paginate($perPage)
+                ->appends(['search' => $search, 'sort' => $sort, 'direction' => $direction]);
+        }
 
-        // $contacts = ContactForm::select('id', 'name', 'title', 'created_at')
-        // ->paginate(20);
-
-
-        return view('contacts.index', compact('contacts'));
+        return view('contacts.index', compact('contacts', 'sort', 'direction', 'search'));
     }
 
     /**
