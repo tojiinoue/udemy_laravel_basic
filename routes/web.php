@@ -25,6 +25,12 @@ Route::get('/check-url', function () {
     return config('app.url');
 });
 
+Route::get('/migrate', function () {
+    \Artisan::call('migrate', ['--force' => true]);
+    return 'Migration done!';
+});
+
+
 
 // Route::resource('contacts', ContactFormController::class);
 
