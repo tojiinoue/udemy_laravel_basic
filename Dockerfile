@@ -1,9 +1,10 @@
 FROM php:8.2-apache
 
-# PHP拡張インストール
+# PHP拡張インストール（PostgreSQLドライバを追加！）
 RUN apt-get update && apt-get install -y \
-    zip unzip git curl libzip-dev libonig-dev \
-    && docker-php-ext-install pdo_mysql mbstring zip
+    zip unzip git curl libzip-dev libonig-dev libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql mbstring zip
+
 
 # Composerインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
