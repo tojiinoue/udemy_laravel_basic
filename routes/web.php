@@ -21,6 +21,11 @@ Route::get('tests/test', [TestController::class, 'index']);
 
 Route::get('shops', [ShopController::class, 'index']);
 
+Route::get('/check-url', function () {
+    return config('app.url');
+});
+
+
 // Route::resource('contacts', ContactFormController::class);
 
 Route::get('/contacts/export', [App\Http\Controllers\CsvDownloadController::class, 'export'])
