@@ -8,19 +8,22 @@ RUN apt-get update && apt-get install -y \
 # Composerインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Laravel用のApache設定
+# Laravelアプリをコンテナにコピー
 COPY . /var/www/html
 WORKDIR /var/www/html
 
+# Laravelの依存パッケージインストールと権限設定
 RUN composer install --no-dev --optimize-autoloader \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
 
-# ApacheのDocumentRoot変更
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# ApacheのDocumentRootを public に変更し、.htaccess 有効化（mod_rewrite）
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
+    && echo '<Directory /var/www/html/public>\n\tAllowOverride All\n</Directory>' >> /etc/apache2/apache2.conf \
+    && a2enmod rewrite
 
+# Laravelの設定キャッシュ削除（.env反映のため）
 RUN php artisan config:clear
-
 
 EXPOSE 80
 CMD ["apache2-foreground"]
