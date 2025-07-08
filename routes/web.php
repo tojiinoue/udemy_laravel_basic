@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\ShopController;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,15 @@ Route::get('shops', [ShopController::class, 'index']);
 
 Route::get('/check-url', function () {
     return config('app.url');
+});
+
+Route::get('/check-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return '✅ DB接続成功！';
+    } catch (\Exception $e) {
+        return '❌ DB接続失敗：' . $e->getMessage();
+    }
 });
 
 Route::get('/migrate', function () {
