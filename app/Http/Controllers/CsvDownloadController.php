@@ -37,6 +37,7 @@ class CsvDownloadController extends Controller
         $filename = 'contacts_' . now()->format('Ymd_His') . '.csv';
         return response()->streamDownload($callback, $filename, [
             'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
         ]);
     }
 }
