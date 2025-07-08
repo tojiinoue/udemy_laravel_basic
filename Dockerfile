@@ -15,6 +15,10 @@ WORKDIR /var/www/html
 # Laravelアプリケーションのコピー
 COPY . .
 
+# Laravelログファイルを事前に作成しておく
+RUN mkdir -p storage/logs && touch storage/logs/laravel.log && chmod -R 777 storage
+
+
 # パーミッションの設定
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
