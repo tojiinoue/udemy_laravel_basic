@@ -1,34 +1,25 @@
-# ベースイメージ（PHP + Apache）
 FROM php:8.2-apache
 
-# 必要なPHP拡張のインストール
+# PHP拡張インストール
 RUN apt-get update && apt-get install -y \
     zip unzip git curl libzip-dev libonig-dev \
     && docker-php-ext-install pdo_mysql mbstring zip
 
-# Composerをインストール
+# Composerインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# 作業ディレクトリの設定
+# 作業ディレクトリ
 WORKDIR /var/www/html
 
-# Laravelアプリケーションのコピー
+# アプリケーションのコピー
 COPY . .
 
-# Laravelログファイルを事前に作成しておく
-RUN mkdir -p storage/logs && touch storage/logs/laravel.log && chmod -R 777 storage
-
-
-# パーミッションの設定
-RUN chown -R www-data:www-data /var/www/html \
+# ストレージ/logs の作成とパーミッション調整
+RUN mkdir -p storage/logs \
+    && chown -R www-data:www-data storage \
+    && chmod -R 775 storage \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
-
-# Laravelのセットアップ
-RUN composer install --no-dev --optimize-autoloader \
-    && php artisan config:clear \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
 
 # Apacheの設定
 RUN a2enmod rewrite
@@ -38,8 +29,5 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 # ポート公開
 EXPOSE 80
 
-# 起動コマンド
-# CMD ["apache2-foreground"]
-CMD tail -f storage/logs/laravel.log
-
-
+# 起動時に Laravel セットアップ → Apache 起動
+CMD ["sh", "-c", "composer install --no-dev --optimize-autoloader && php artisan config:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache && apache2-foreground"]
