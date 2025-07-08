@@ -1,9 +1,10 @@
 [phases.setup]
-nixPkgs = ["php", "composer", "nodejs_18"]
+nixPkgs = ["php", "nodejs_18"]  # composer は削除！
 
 [phases.install]
 cmds = [
-  "composer install",
+  "curl -sS https://getcomposer.org/installer | php",
+  "php composer.phar install",
   "npm install"
 ]
 
