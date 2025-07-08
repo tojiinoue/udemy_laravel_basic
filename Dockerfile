@@ -35,4 +35,7 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 EXPOSE 80
 
 # 起動コマンド
-CMD ["apache2-foreground"]
+# CMD ["apache2-foreground"]
+CMD tail -f storage/logs/laravel.log
+
+
