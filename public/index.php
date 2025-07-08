@@ -2,6 +2,8 @@
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+// public/index.php の先頭あたりに追記
+error_reporting(E_ALL & ~E_DEPRECATED);
 
 define('LARAVEL_START', microtime(true));
 

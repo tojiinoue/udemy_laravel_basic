@@ -17,6 +17,7 @@
                         <input type="hidden" name="sort" value="{{ $sort ?? 'id' }}">
                         <input type="hidden" name="direction" value="{{ $direction ?? 'asc' }}">
                     </form>
+                    <a href="{{ route('contacts.export', request()->query())}}" class="text-blue-500 mb-4 inline-block">CSVダウンロード</a>
                     <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                     <table class="table-auto w-full text-left whitespace-no-wrap">
                         <thead>

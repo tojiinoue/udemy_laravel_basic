@@ -23,6 +23,10 @@ Route::get('shops', [ShopController::class, 'index']);
 
 // Route::resource('contacts', ContactFormController::class);
 
+Route::get('/contacts/export', [App\Http\Controllers\CsvDownloadController::class, 'export'])
+    ->name('contacts.export')
+    ->middleware(['auth']);
+
 Route::prefix('contacts')
 ->middleware(['auth'])
 ->controller(ContactFormController::class)
