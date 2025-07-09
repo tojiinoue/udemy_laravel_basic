@@ -1,4 +1,4 @@
-# 📨 お問い合わせ管理アプリ（Laravel練習用）
+# お問い合わせ管理アプリ（Laravel練習用）
 
 Laravelの基礎構文および実務案件に必要な機能（CRUD・CSV出力・検索・バリデーション等）を習得するために作成した学習用アプリです。  
 案件に備えて、PHPおよびLaravelの基本操作と構成の理解を深めることを目的としています。  
@@ -7,7 +7,7 @@ Docker＋Renderを使った本番環境構築まで対応しており、ロー�
 
 ---
 
-## 📎 デモURL
+## デモURL
 
 🔗 [https://udemy-laravel-basic.onrender.com/contacts](https://udemy-laravel-basic.onrender.com/contacts)
 
@@ -15,14 +15,14 @@ Docker＋Renderを使った本番環境構築まで対応しており、ロー�
 
 ---
 
-## 🧪 テスト用アカウント
+## テスト用アカウント
 
 - Email: `test@example.com`  
 - Password: `password123`
 
 ---
 
-## 🛠 使用技術
+## 使用技術
 
 | 項目         | 内容                             |
 |--------------|----------------------------------|
@@ -36,7 +36,7 @@ Docker＋Renderを使った本番環境構築まで対応しており、ロー�
 
 ---
 
-## ✅ 実装した主な機能（実務案件を想定）
+## 実装した主な機能（実務案件を想定）
 
 - ログイン・ログアウト（Breeze使用）
 - お問い合わせ一覧／新規登録／編集／削除（基本のCRUD処理）
@@ -49,7 +49,7 @@ Docker＋Renderを使った本番環境構築まで対応しており、ロー�
 
 ---
 
-## 🧱 ローカル開発用セットアップ
+## ローカル開発用セットアップ
 
 ```bash
 git clone https://github.com/tojiinoue/udemy_laravel_basic.git
@@ -71,7 +71,7 @@ php artisan serve
 
 ---
 
-## 🔧 今後の改修予定（実務スキル向上を目的）
+## 今後の改修予定（実務スキル向上を目的）
 
 * ソフトデリート（論理削除）対応
 * 管理者ロールによるアクセス制御（Gate／Policy学習）
@@ -82,7 +82,7 @@ php artisan serve
 
 ---
 
-## 📝 補足：本番環境構築に関する学び
+## 補足：本番環境構築に関する学び
 
 DockerとRenderを使って初めて本番環境を構築しました。特に下記の点に注意・対応しています：
 
@@ -93,7 +93,7 @@ DockerとRenderを使って初めて本番環境を構築しました。特に�
 
 ---
 
-## 📈 学習の成果まとめ
+## 学習の成果まとめ
 
 * Laravelの基本構文（ルーティング、Controller、Model、View）と開発フローを理解
 * バリデーションやクエリ検索、CSV出力など、実務でよく使われる機能を一通り経験
@@ -101,10 +101,10 @@ DockerとRenderを使って初めて本番環境を構築しました。特に�
 
 ---
 
-## 🔗 参考リンク
+## 参考リンク
 
-* 📘 Laravel公式ドキュメント（9.x）
-    👉 [https://readouble.com/laravel/9.x/ja/](https://readouble.com/laravel/9.x/ja/)
+* Laravel公式ドキュメント（9.x）
+    → [https://readouble.com/laravel/9.x/ja/](https://readouble.com/laravel/9.x/ja/)
 
-* 🎓 Udemy教材：Laravel入門講座
-    👉 [https://www.udemy.com/share/102CWj3@-LuLq3ocIrjXXQ\_SB\_H\_oq3Y\_5BuOOXoQQvl51Dl2AvsiW-zaICeLI4VbOHQnKQgqw==/](https://www.udemy.com/share/102CWj3@-LuLq3ocIrjXXQ_SB_H_oq3Y_5BuOOXoQQvl51Dl2AvsiW-zaICeLI4VbOHQnKQgqw==/)
+* Udemy教材：Laravel入門講座
+    → [https://www.udemy.com/share/102CWj3@-LuLq3ocIrjXXQ\_SB\_H\_oq3Y\_5BuOOXoQQvl51Dl2AvsiW-zaICeLI4VbOHQnKQgqw==/](https://www.udemy.com/share/102CWj3@-LuLq3ocIrjXXQ_SB_H_oq3Y_5BuOOXoQQvl51Dl2AvsiW-zaICeLI4VbOHQnKQgqw==/)
