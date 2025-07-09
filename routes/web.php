@@ -26,22 +26,6 @@ Route::get('/check-url', function () {
     return config('app.url');
 });
 
-Route::get('/check-db', function () {
-    try {
-        DB::connection()->getPdo();
-        return '✅ DB接続成功！';
-    } catch (\Exception $e) {
-        return '❌ DB接続失敗：' . $e->getMessage();
-    }
-});
-
-Route::get('/migrate', function () {
-    \Artisan::call('migrate', ['--force' => true]);
-    return 'Migration done!';
-});
-
-
-
 // Route::resource('contacts', ContactFormController::class);
 
 Route::get('/contacts/export', [App\Http\Controllers\CsvDownloadController::class, 'export'])
