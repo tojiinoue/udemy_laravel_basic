@@ -9,7 +9,7 @@ Renderにデプロイ済みのLaravel製お問い合わせ管理アプリです�
 基本的なCRUDから検索・並び替え・CSVダウンロードまで、Laravelでよく使う機能を一通り入れてます。
 
 📎 **デモURL**
-🔗 [https://udemy-laravel-basic.onrender.com](https://udemy-laravel-basic.onrender.com)
+🔗 [https://udemy-laravel-basic.onrender.com/contacts](https://udemy-laravel-basic.onrender.com/contacts)
 
 ---
 
